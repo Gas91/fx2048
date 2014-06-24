@@ -8,6 +8,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.geometry.Bounds;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -36,6 +37,7 @@ public class Game2048 extends Application {
 
         Scene scene = new Scene(root, 600, 720);
         scene.getStylesheets().add("game2048/game.css");
+        
         addKeyHandler(scene);
         addSwipeHandlers(scene);
 
@@ -50,6 +52,7 @@ public class Game2048 extends Application {
 
         primaryStage.setTitle("2048FX");
         primaryStage.setScene(scene);
+        primaryStage.getIcons().add(new Image("/2048.png")); //icona programma
         primaryStage.setMinWidth(gameBounds.getWidth());
         primaryStage.setMinHeight(gameBounds.getHeight());
         primaryStage.show();
