@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * @author bruno.borges@oracle.com
@@ -59,6 +60,7 @@ public class Game2048 extends Application {
         primaryStage.setTitle("2048FX");
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image("resources/icons/2048.png")); //icona programma
+        //primaryStage.initStyle(StageStyle.UNDECORATED);  //prova per il borderless
         primaryStage.setMinWidth(gameBounds.getWidth());
         primaryStage.setMinHeight(gameBounds.getHeight());
         primaryStage.show();
