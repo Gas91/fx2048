@@ -52,7 +52,7 @@ public class Game2048 extends Application {
 
         primaryStage.setTitle("2048FX");
         primaryStage.setScene(scene);
-        primaryStage.getIcons().add(new Image("/2048.png")); //icona programma
+        primaryStage.getIcons().add(new Image("resources/icons/2048.png")); //icona programma
         primaryStage.setMinWidth(gameBounds.getWidth());
         primaryStage.setMinHeight(gameBounds.getHeight());
         primaryStage.show();
