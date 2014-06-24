@@ -20,6 +20,7 @@ public class Game2048 extends Application {
 
     private GameManager gameManager;
     private Bounds gameBounds;
+    private boolean auto = false; //Definisce se la partita è automatica o no
 
     @Override
     public void start(Stage primaryStage) {
@@ -37,9 +38,14 @@ public class Game2048 extends Application {
 
         Scene scene = new Scene(root, 600, 720);
         scene.getStylesheets().add("game2048/game.css");
+
+        if(auto){
+
+        } else {
+            addKeyHandler(scene);
+            addSwipeHandlers(scene);
+        }
         
-        addKeyHandler(scene);
-        addSwipeHandlers(scene);
 
         if (isARMDevice()) {
             primaryStage.setFullScreen(true);
@@ -61,7 +67,7 @@ public class Game2048 extends Application {
     private boolean isARMDevice() {
         return System.getProperty("os.arch").toUpperCase().contains("ARM");
     }
-
+    
     private void addKeyHandler(Scene scene) {
         scene.setOnKeyPressed(ke -> {
             KeyCode keyCode = ke.getCode();
