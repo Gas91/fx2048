@@ -21,12 +21,12 @@ public class AutoGame implements Runnable{
     public AutoGame(){
         listeners = new EventListenerList();
         //this.gM=gM;
-        //    try {
-        //        gA = GiocatoreAutomatico.getGiocatoreAutomatico();
-        //    } catch (Exception ex) {
-        //        Logger.getLogger(AutoGame.class.getName()).log(Level.SEVERE, null, ex);
-        //    }
-            gr = new MyGriglia();
+        try {
+            gA = GiocatoreAutomatico.getGiocatoreAutomatico();
+        } catch (Exception ex) {
+            Logger.getLogger(AutoGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        gr = new MyGriglia();
     }
     
     @Override
@@ -34,10 +34,10 @@ public class AutoGame implements Runnable{
         while(true){
             int m = gA.prossimaMossa(gr);
             System.out.print(m);
-           fireNewDirection(m);
+            fireNewDirection(m);
                 //gM.move(m);
                 //gM.move(1);
-                Attendi.ms(TIME_DELAY_BOT);
+            Attendi.ms(TIME_DELAY_BOT);
 
         }
     }

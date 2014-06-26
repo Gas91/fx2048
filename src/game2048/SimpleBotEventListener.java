@@ -7,6 +7,7 @@ import giocatoreAutomatico.event.BotEventListener;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import javafx.scene.input.KeyCode;
 
 /**
  *
@@ -41,6 +42,7 @@ public class SimpleBotEventListener implements BotEventListener{
                     robot.keyRelease(KeyEvent.VK_LEFT);
                 break;
                 default:
+                    //gM.move(Direction.valueFor(KeyCode.DOWN));
                     robot.keyPress(KeyEvent.VK_DOWN);
                     robot.keyRelease(KeyEvent.VK_DOWN);
                 break;
