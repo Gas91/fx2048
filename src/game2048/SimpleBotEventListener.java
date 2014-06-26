@@ -13,7 +13,7 @@ import java.awt.event.KeyEvent;
  * @author Luigi
  */
 public class SimpleBotEventListener implements BotEventListener{
-    private static GameManager gM;
+    private GameManager gM;
     public SimpleBotEventListener(GameManager gM){
         this.gM = gM;
     }
@@ -41,14 +41,13 @@ public class SimpleBotEventListener implements BotEventListener{
                     robot.keyRelease(KeyEvent.VK_LEFT);
                 break;
                 default:
-                    //gM.move(Direction.DOWN);
                     robot.keyPress(KeyEvent.VK_DOWN);
                     robot.keyRelease(KeyEvent.VK_DOWN);
                 break;
             }
         } catch (AWTException e2) {
             e2.printStackTrace();
-}
+        }
         
         //gM.move(e.getResult());
     }
