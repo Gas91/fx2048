@@ -238,7 +238,7 @@ public class GameManager extends Group {
     private void createScore() {
         Label lblTitle = new Label("2048");
         lblTitle.getStyleClass().add("title");
-        Label lblSubtitle = new Label("FX");
+        Label lblSubtitle = new Label(" Holo");
         lblSubtitle.getStyleClass().add("subtitle");
         HBox hFill = new HBox();
         HBox.setHgrow(hFill, Priority.ALWAYS);
