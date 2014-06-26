@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package giocatoreAutomatico;
 
@@ -16,21 +11,21 @@ import javax.swing.event.EventListenerList;
  * @author Luigi Fiorelli
  */
 public class AutoGame implements Runnable{
-    private final int TIME_DELAY_BOT = 2000; //ms tra una mossa e l'altra del bot
+    private final int TIME_DELAY_BOT = 500; //ms tra una mossa e l'altra del bot
     private GameManager gM;
     private GiocatoreAutomatico gA;
     private Griglia gr;
     
     private EventListenerList listeners;
     
-    public AutoGame(GameManager gM){
+    public AutoGame(){
         listeners = new EventListenerList();
-        this.gM=gM;
-            try {
-                gA = GiocatoreAutomatico.getGiocatoreAutomatico();
-            } catch (Exception ex) {
-                Logger.getLogger(AutoGame.class.getName()).log(Level.SEVERE, null, ex);
-               }
+        //this.gM=gM;
+        //    try {
+        //        gA = GiocatoreAutomatico.getGiocatoreAutomatico();
+        //    } catch (Exception ex) {
+        //        Logger.getLogger(AutoGame.class.getName()).log(Level.SEVERE, null, ex);
+        //    }
             gr = new MyGriglia();
     }
     

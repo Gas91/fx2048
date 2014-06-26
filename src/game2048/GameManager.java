@@ -281,7 +281,7 @@ public class GameManager extends Group {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Il giocatore automatico è partito!");
-                AutoGame aG = new AutoGame(gM);
+                AutoGame aG = new AutoGame();
                 SimpleBotEventListener l = new SimpleBotEventListener(gM);
                 aG.addBotEventListener(l);
                 
