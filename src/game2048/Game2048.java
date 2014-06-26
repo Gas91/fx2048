@@ -52,6 +52,7 @@ public class Game2048 extends Application {
             addSwipeHandlers(scene);
         }
         
+        
 
         if (isARMDevice()) {
             primaryStage.setFullScreen(true);

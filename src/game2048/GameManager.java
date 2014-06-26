@@ -1,6 +1,8 @@
 package game2048;
 
 import giocatoreAutomatico.AutoGame;
+import giocatoreAutomatico.event.BotEvent;
+import giocatoreAutomatico.event.BotEventListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -280,15 +282,16 @@ public class GameManager extends Group {
             public void handle(ActionEvent event) {
                 System.out.println("Il giocatore automatico è partito!");
                 AutoGame aG = new AutoGame(gM);
-                System.out.println("1");
+                SimpleBotEventListener l = new SimpleBotEventListener(gM);
+                aG.addBotEventListener(l);
+                
                 Thread thAG = new Thread(aG);
-                System.out.println("1");
                 thAG.start();
-                System.out.println("1");
+                //thAG.
             }
         });
         vAuto.getChildren().add(b);
-                
+
         VBox vScore = new VBox();
         vScore.setAlignment(Pos.CENTER);
         vScore.getStyleClass().add("vbox");
@@ -298,8 +301,6 @@ public class GameManager extends Group {
         lblScore.textProperty().bind(gameScoreProperty.asString());
         vScore.getChildren().addAll(lblTit, lblScore);
         
-        ;
-
         hTop.getChildren().addAll(lblTitle, lblSubtitle, vAuto, hFill, vScore);
         hTop.setMinSize(GRID_WIDTH, TOP_HEIGHT);
         hTop.setPrefSize(GRID_WIDTH, TOP_HEIGHT);
@@ -311,6 +312,7 @@ public class GameManager extends Group {
         lblPoints.getStyleClass().add("points");
 
         getChildren().add(lblPoints);
+        
     }
 
     private void createGrid() {
