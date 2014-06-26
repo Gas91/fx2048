@@ -94,6 +94,10 @@ public class GameManager extends Group {
         this.setManaged(false);
     }
     
+    /*
+     * @author Luigi Fiorelli
+     * @param n in base a questo intero dal valore compreso tra 0 e 3 sceglie il movimento da fare.
+    */
     public void move(int n){
         Direction d;
         switch(n){
