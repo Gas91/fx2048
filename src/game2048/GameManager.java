@@ -1,5 +1,6 @@
 package game2048;
 
+import giocatoreAutomatico.AutoGame;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,6 +27,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -92,6 +94,30 @@ public class GameManager extends Group {
         initializeGrid();
 
         this.setManaged(false);
+    }
+    
+    /*
+     * @author Luigi Fiorelli
+     * @param n in base a questo intero dal valore compreso tra 0 e 3 sceglie il movimento da fare.
+    */
+    public void move(int n){
+        Direction d;
+        switch(n){
+            case 0:
+                d = Direction.UP;
+            break;
+            case 1:
+                d = Direction.RIGHT;
+            break;
+            case 2:
+                d = Direction.LEFT;
+            break;
+            default:
+                d = Direction.RIGHT;
+            break;
+        }
+        this.move(d);
+        
     }
 
     public void move(Direction direction) {
@@ -243,6 +269,26 @@ public class GameManager extends Group {
         HBox hFill = new HBox();
         HBox.setHgrow(hFill, Priority.ALWAYS);
         hFill.setAlignment(Pos.CENTER);
+        
+        VBox vAuto = new VBox(); /*VBox per il bottone di gioco automatico*/
+        vAuto.setAlignment(Pos.CENTER); 
+        Button b = new Button(); /*Bottone per il gioco automatico*/
+        b.setText("Auto");
+        GameManager gM = this;
+        b.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Il giocatore automatico è partito!");
+                AutoGame aG = new AutoGame(gM);
+                System.out.println("1");
+                Thread thAG = new Thread(aG);
+                System.out.println("1");
+                thAG.start();
+                System.out.println("1");
+            }
+        });
+        vAuto.getChildren().add(b);
+                
         VBox vScore = new VBox();
         vScore.setAlignment(Pos.CENTER);
         vScore.getStyleClass().add("vbox");
@@ -251,8 +297,10 @@ public class GameManager extends Group {
         lblScore.getStyleClass().add("score");
         lblScore.textProperty().bind(gameScoreProperty.asString());
         vScore.getChildren().addAll(lblTit, lblScore);
+        
+        ;
 
-        hTop.getChildren().addAll(lblTitle, lblSubtitle, hFill, vScore);
+        hTop.getChildren().addAll(lblTitle, lblSubtitle, vAuto, hFill, vScore);
         hTop.setMinSize(GRID_WIDTH, TOP_HEIGHT);
         hTop.setPrefSize(GRID_WIDTH, TOP_HEIGHT);
         hTop.setMaxSize(GRID_WIDTH, TOP_HEIGHT);
