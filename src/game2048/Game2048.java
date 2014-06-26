@@ -8,9 +8,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.geometry.Bounds;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontSmoothingType;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -38,6 +42,7 @@ public class Game2048 extends Application {
         root.heightProperty().addListener(resize);
 
         Scene scene = new Scene(root, 600, 720);
+        Font Roboto = Font.loadFont(getClass().getResourceAsStream("/resources/font/RobotoLight.ttf"), 20);
         scene.getStylesheets().add("game2048/game.css");
 
         if(auto){
@@ -57,7 +62,7 @@ public class Game2048 extends Application {
             scene.setCursor(Cursor.NONE);
         }
 
-        primaryStage.setTitle("2048FX");
+        primaryStage.setTitle("2048HOLO");
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image("resources/icons/2048.png")); //icona programma
         //primaryStage.initStyle(StageStyle.UNDECORATED);  //prova per il borderless
@@ -65,7 +70,7 @@ public class Game2048 extends Application {
         primaryStage.setMinHeight(gameBounds.getHeight());
         primaryStage.show();
     }
-
+    
     private boolean isARMDevice() {
         return System.getProperty("os.arch").toUpperCase().contains("ARM");
     }
