@@ -93,6 +93,26 @@ public class GameManager extends Group {
 
         this.setManaged(false);
     }
+    
+    public void move(int n){
+        Direction d;
+        switch(n){
+            case 0:
+                d = Direction.UP;
+            break;
+            case 1:
+                d = Direction.RIGHT;
+            break;
+            case 2:
+                d = Direction.LEFT;
+            break;
+            default:
+                d = Direction.RIGHT;
+            break;
+        }
+        this.move(d);
+        
+    }
 
     public void move(Direction direction) {
         if (layerOnProperty.get()) {
