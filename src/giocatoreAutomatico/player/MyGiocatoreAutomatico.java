@@ -1,10 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package giocatoreAutomatico.player;
+
+import giocatoreAutomatico.*;
+import java.util.Random;
 
 /**
  *
@@ -12,6 +10,11 @@ package giocatoreAutomatico.player;
  * @author Marco Loriga
  * @author Dario Puligheddu
  */
-public class MyGiocatoreAutomatico {
+public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
+    private Random r = new Random();
+    @Override
+    public int prossimaMossa(Griglia g) {
+        return r.nextInt(4);
+    }
     
 }
