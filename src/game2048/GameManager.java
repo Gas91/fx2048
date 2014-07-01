@@ -1,6 +1,7 @@
 package game2048;
 
 import giocatoreAutomatico.AutoGame;
+import giocatoreAutomatico.MyGriglia;
 import giocatoreAutomatico.event.BotEvent;
 import giocatoreAutomatico.event.BotEventListener;
 import java.util.ArrayList;
@@ -68,6 +69,8 @@ public class GameManager extends Group {
     private final Set<Tile> mergedToBeRemoved = new HashSet<>();
     private final ParallelTransition parallelTransition = new ParallelTransition();
     private final BooleanProperty layerOnProperty = new SimpleBooleanProperty(false);
+    
+    private MyGriglia griglia = new MyGriglia();
 
     // User Interface controls
     private final VBox vGame = new VBox(50);
@@ -94,6 +97,8 @@ public class GameManager extends Group {
         initGameProperties();
 
         initializeGrid();
+        
+        createGriglia();
 
         this.setManaged(false);
     }
@@ -210,6 +215,9 @@ public class GameManager extends Group {
 
         parallelTransition.play();
         parallelTransition.getChildren().clear();
+        
+        createGriglia(); //Aggiorno la struttura della griglia giocatoreAutomatico.Griglia
+                
     }
 
     private Location findFarthestLocation(Location location, Direction direction) {
@@ -277,17 +285,30 @@ public class GameManager extends Group {
         Button b = new Button(); /*Bottone per il gioco automatico*/
         b.setText("Auto");
         GameManager gM = this;
+        AutoGame aG = new AutoGame();
+        SimpleBotEventListener l = new SimpleBotEventListener(gM);
+        aG.addBotEventListener(l);
+        Thread thAG = new Thread(aG);
         b.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Il giocatore automatico è partito!");
-                AutoGame aG = new AutoGame();
-                SimpleBotEventListener l = new SimpleBotEventListener(gM);
-                aG.addBotEventListener(l);
+                switch(aG.getStato()){
+                    case 0:
+                        System.out.println("Il giocatore automatico è partito!xxx");
+                        aG.on();
+                        thAG.start();
+                    break;
+                    case 1:
+                        System.out.println("Il giocatore automatico è stato bloccato!");
+                        aG.off();
+                    break;
+                    case 2:
+                        System.out.println("Il giocatore automatico è partito!");
+                        aG.on();
+                    break;
+                }
                 
-                Thread thAG = new Thread(aG);
-                thAG.start();
-                //thAG.
+
             }
         });
         vAuto.getChildren().add(b);
@@ -606,5 +627,29 @@ public class GameManager extends Group {
             // not session found, restart again
             resetGame();
         }
+    }
+    
+    private void createGriglia(){
+        int i;
+        int j;
+        Location loc;
+        Tile tile;
+        for(i=0;i<gridSize;i++){
+            for(j=0;j<gridSize;j++){
+                loc = new Location(j,i);
+                tile = gameGrid.get(loc);
+                if(tile != null){
+                    this.griglia.put(loc, tile.getValue());
+                } else {
+                    this.griglia.put(loc, -1);
+                }
+                
+            }
+        }
+    }
+    
+    public MyGriglia getGriglia(){
+        
+        return griglia;
     }
 }
