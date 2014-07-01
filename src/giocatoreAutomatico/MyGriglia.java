@@ -24,8 +24,7 @@ public class MyGriglia implements Griglia{
 
     @Override
     public Integer put(Location key, Integer value) {
-        gameGrid.put(key, value);
-        return 1;
+        return gameGrid.put(key, value);
     }
     
     @Override
