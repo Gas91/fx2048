@@ -1,18 +1,23 @@
 
 package giocatoreAutomatico;
 
-import game2048.GameManager;
 import giocatoreAutomatico.event.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.event.EventListenerList;
 /**
- *
  * @author Luigi Fiorelli
  */
 public class AutoGame implements Runnable{
-    private final int TIME_DELAY_BOT = 500; //ms tra una mossa e l'altra del bot
-    private EventListenerList listeners;
+    
+    /** Determina quanti <b>millisecondi</b> passano tra una mossa e l'altra del bot */
+    private final int TIME_DELAY_BOT = 500;     
+    private final EventListenerList listeners;
+    /** Questa variabile determina lo stato di esecuzione del thread:
+     * <UL>
+     * <LI><b>Valore 0</b> Il thread è disattivato e non è mai stato attivato</LI>
+     * <LI><b>Valore 1</b> Il thread è attivo</LI>
+     * <LI><b>Valore 2</b> Il thread è disattivato</LI>
+     * </UL>
+     */
     private int stato = 0;
     
     public AutoGame(){
@@ -30,17 +35,31 @@ public class AutoGame implements Runnable{
         
     }
     
+    /**
+     * Disabilita il thread
+     */
     public void off(){
         stato = 2;
     }
-       public void on(){
+    
+    /**
+     * Abilita il thread
+     */
+    public void on(){
         stato = 1;
     }
     
+    /**
+     * Restituisce lo stato attuale del thread
+     * @return Restituisce lo stato attuale del thread
+     */
     public int getStato(){
         return stato;
     }
     
+    /**
+     * Richiama l'evento
+     */
     private void fireNewDirection(int move){
         BotEvent event = new BotEvent(this, move);
         Object[] listenersArray = listeners.getListenerList();
@@ -50,10 +69,19 @@ public class AutoGame implements Runnable{
             }
         }
     }
+    
+    /**
+     * Aggiunge un BotEvetListener
+     * @param l Il BotEventListener da aggiungere
+     */
     public void addBotEventListener(BotEventListener l){
         listeners.add(BotEventListener.class, l);
     }
-
+    
+    /**
+     * Rimuove un BotEventListener
+     * @param l Il BotEventListener da rimuovere
+     */
     public void removeBotEventListener(BotEventListener l){
         listeners.remove(BotEventListener.class, l);
     }
