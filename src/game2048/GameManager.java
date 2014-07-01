@@ -283,7 +283,7 @@ public class GameManager extends Group {
         VBox vAuto = new VBox(); /*VBox per il bottone di gioco automatico*/
         vAuto.setAlignment(Pos.CENTER); 
         Button b = new Button(); /*Bottone per il gioco automatico*/
-        b.setText("Auto");
+        b.setText("Avvia Auto");
         GameManager gM = this;
         AutoGame aG = new AutoGame();
         SimpleBotEventListener l = new SimpleBotEventListener(gM);
@@ -294,16 +294,19 @@ public class GameManager extends Group {
             public void handle(ActionEvent event) {
                 switch(aG.getStato()){
                     case 0:
-                        System.out.println("Il giocatore automatico è partito!xxx");
+                        System.out.println("Il giocatore automatico è partito!");
+                        b.setText("Stoppa Auto");
                         aG.on();
                         thAG.start();
                     break;
                     case 1:
                         System.out.println("Il giocatore automatico è stato bloccato!");
+                        b.setText("Avvia Auto");
                         aG.off();
                     break;
                     case 2:
                         System.out.println("Il giocatore automatico è partito!");
+                        b.setText("Stoppa Auto");
                         aG.on();
                     break;
                 }
