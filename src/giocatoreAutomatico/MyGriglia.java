@@ -9,6 +9,7 @@ package giocatoreAutomatico;
 import game2048.Location;
 import giocatoreAutomatico.*;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 /**
@@ -16,7 +17,12 @@ import java.util.Set;
  * @author Luigi
  */
 public class MyGriglia implements Griglia{
-
+    private final Map<Location, Integer> gameGrid;
+    
+    public MyGriglia(){
+        gameGrid = new HashMap<>();
+    }
+    
     @Override
     public int size() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -39,12 +45,13 @@ public class MyGriglia implements Griglia{
 
     @Override
     public Integer get(Object key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return gameGrid.get(key);
     }
 
     @Override
     public Integer put(Location key, Integer value) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        gameGrid.put(key, value);
+        return 1;
     }
 
     @Override
