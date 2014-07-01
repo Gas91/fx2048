@@ -1,10 +1,13 @@
 package game2048;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.ConditionalFeature;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Bounds;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
@@ -17,6 +20,7 @@ import javafx.scene.text.FontSmoothingType;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 /**
  * @author bruno.borges@oracle.com
@@ -25,10 +29,15 @@ public class Game2048 extends Application {
 
     private GameManager gameManager;
     private Bounds gameBounds;
-    private boolean auto = false; //Definisce se la partita è automatica o no
 
     @Override
     public void start(Stage primaryStage) {
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                System.exit(0);
+            }
+        });
         gameManager = new GameManager();
         gameBounds = gameManager.getLayoutBounds();
 
@@ -45,15 +54,9 @@ public class Game2048 extends Application {
         Font Roboto = Font.loadFont(getClass().getResourceAsStream("/resources/font/RobotoLight.ttf"), 20);
         scene.getStylesheets().add("game2048/game.css");
 
-        if(auto){
-
-        } else {
-            addKeyHandler(scene);
-            addSwipeHandlers(scene);
-        }
+        addKeyHandler(scene);
+        addSwipeHandlers(scene);
         
-        
-
         if (isARMDevice()) {
             primaryStage.setFullScreen(true);
             primaryStage.setFullScreenExitHint("");
