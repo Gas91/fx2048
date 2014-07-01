@@ -70,7 +70,10 @@ public class GameManager extends Group {
     private final ParallelTransition parallelTransition = new ParallelTransition();
     private final BooleanProperty layerOnProperty = new SimpleBooleanProperty(false);
     
-    private MyGriglia griglia = new MyGriglia();
+    private final MyGriglia griglia = new MyGriglia();
+    private AutoGame aG; /** Giocatore automatico */
+    private SimpleBotEventListener l; /** Listener dell'evento del giocatore automatico */
+    private Thread thAG; /** Thread che fa partire l'evento per fare la mossa automatica successiva*/
 
     // User Interface controls
     private final VBox vGame = new VBox(50);
@@ -98,7 +101,7 @@ public class GameManager extends Group {
 
         initializeGrid();
         
-        createGriglia();
+        createGriglia(); /* Crea la griglia da passare al giocatore automatico */
 
         this.setManaged(false);
     }
@@ -285,10 +288,10 @@ public class GameManager extends Group {
         Button b = new Button(); /*Bottone per il gioco automatico*/
         b.setText("Avvia Auto");
         GameManager gM = this;
-        AutoGame aG = new AutoGame();
-        SimpleBotEventListener l = new SimpleBotEventListener(gM);
+        aG = new AutoGame();
+        l = new SimpleBotEventListener(gM);
         aG.addBotEventListener(l);
-        Thread thAG = new Thread(aG);
+        thAG = new Thread(aG);
         b.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -632,6 +635,11 @@ public class GameManager extends Group {
         }
     }
     
+    /**
+     * Questo metodo crea una griglia di tipo MyGriglia sfruttando i metodi MyGriglia.put e basandosi sulla griglia di gioco.
+     * Ad ogni elemento viene assegnato il valore del tile corrispondente e se il tile è vuoto gli viene assegnato -1
+     * @author Luigi Fiorelli
+     */
     private void createGriglia(){
         int i;
         int j;
@@ -646,13 +654,15 @@ public class GameManager extends Group {
                 } else {
                     this.griglia.put(loc, -1);
                 }
-                
             }
         }
     }
     
+    /**
+     * @author Luigi Fiorelli
+     * @return Restituisce una griglia di classe MyGriglia
+     */
     public MyGriglia getGriglia(){
-        
         return griglia;
     }
 }
