@@ -32,12 +32,6 @@ public class Game2048 extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                System.exit(0);
-            }
-        });
         gameManager = new GameManager();
         gameBounds = gameManager.getLayoutBounds();
 
@@ -72,6 +66,12 @@ public class Game2048 extends Application {
         //primaryStage.initStyle(StageStyle.UNDECORATED);  //prova per il borderless
         primaryStage.setMinWidth(gameBounds.getWidth());
         primaryStage.setMinHeight(gameBounds.getHeight());
+                primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                System.exit(0);
+            }
+        });
         primaryStage.show();
     }
     
