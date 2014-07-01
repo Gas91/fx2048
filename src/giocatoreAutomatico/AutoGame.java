@@ -12,34 +12,33 @@ import javax.swing.event.EventListenerList;
  */
 public class AutoGame implements Runnable{
     private final int TIME_DELAY_BOT = 500; //ms tra una mossa e l'altra del bot
-    private GameManager gM;
-    private GiocatoreAutomatico gA;
-    private Griglia gr;
-    
     private EventListenerList listeners;
+    private int stato = 0;
     
     public AutoGame(){
         listeners = new EventListenerList();
-        //this.gM=gM;
-        try {
-            gA = GiocatoreAutomatico.getGiocatoreAutomatico();
-        } catch (Exception ex) {
-            Logger.getLogger(AutoGame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        gr = new MyGriglia();
     }
     
     @Override
     public void run() {
         while(true){
-            int m = gA.prossimaMossa(gr);
-            System.out.print(m);
-            fireNewDirection(m);
-                //gM.move(m);
-                //gM.move(1);
+            if(stato==1){
+                fireNewDirection(1);
+            }
             Attendi.ms(TIME_DELAY_BOT);
-
         }
+        
+    }
+    
+    public void off(){
+        stato = 2;
+    }
+       public void on(){
+        stato = 1;
+    }
+    
+    public int getStato(){
+        return stato;
     }
     
     private void fireNewDirection(int move){
