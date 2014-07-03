@@ -1,5 +1,3 @@
-/*Questa classe permette di attendere n ms*/
-
 package giocatoreAutomatico;
 
 import java.util.logging.Level;
