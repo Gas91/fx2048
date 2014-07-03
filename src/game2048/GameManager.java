@@ -1,8 +1,6 @@
 package game2048;
 
 import giocatoreAutomatico.AutoGame;
-import giocatoreAutomatico.event.BotEvent;
-import giocatoreAutomatico.event.BotEventListener;
 import giocatoreAutomatico.player.MyGriglia;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +28,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -71,10 +68,16 @@ public class GameManager extends Group {
     private final ParallelTransition parallelTransition = new ParallelTransition();
     private final BooleanProperty layerOnProperty = new SimpleBooleanProperty(false);
     
+    private static final String LABEL_BOT_AVVIA = "Avvia Bot";
+    private static final String LABEL_BOT_FERMA = "Ferma Bot";
     private final MyGriglia griglia = new MyGriglia();
-    private AutoGame aG; /** Giocatore automatico */
-    private SimpleBotEventListener l; /** Listener dell'evento del giocatore automatico */
-    private Thread thAG; /** Thread che fa partire l'evento per fare la mossa automatica successiva*/
+    /** Giocatore automatico */
+    private AutoGame aG; 
+    /** Listener dell'evento del giocatore automatico */
+    private SimpleBotEventListener l; 
+    /** Thread che fa partire l'evento per fare la mossa automatica successiva*/
+    private Thread thAG; 
+    private final Button bAutoGame = new Button(LABEL_BOT_AVVIA);
 
     // User Interface controls
     private final VBox vGame = new VBox(50);
@@ -290,37 +293,30 @@ public class GameManager extends Group {
         
         VBox vAuto = new VBox(); /*VBox per il bottone di gioco automatico*/
         vAuto.setAlignment(Pos.CENTER); 
-        Button bAutoGame = new Button(); /*Bottone per il gioco automatico*/
-        bAutoGame.setText("Avvia Auto");
         bAutoGame.getStyleClass().addAll("bAutoGame");
         GameManager gM = this;
         aG = new AutoGame();
         l = new SimpleBotEventListener(gM);
         aG.addBotEventListener(l);
         thAG = new Thread(aG);
+        thAG.start();
         bAutoGame.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 switch(aG.getStato()){
                     case 0:
                         System.out.println("Il giocatore automatico è partito!");
-                        bAutoGame.setText("Stoppa Auto");
-                        aG.on();
-                        thAG.start();
+                        setOnThread();
                     break;
                     case 1:
                         System.out.println("Il giocatore automatico è stato bloccato!");
-                        bAutoGame.setText("Avvia Auto");
-                        aG.off();
+                        setOffThread();
                     break;
                     case 2:
                         System.out.println("Il giocatore automatico è partito!");
-                        bAutoGame.setText("Stoppa Auto");
-                        aG.on();
+                        setOnThread();
                     break;
                 }
-                
-
             }
         });
         vAuto.getChildren().add(bAutoGame);
@@ -456,6 +452,7 @@ public class GameManager extends Group {
     }
 
     private void resetGame() {
+        setOffThread();
         clearGame();
         initializeGrid();
     }
@@ -670,5 +667,23 @@ public class GameManager extends Group {
      */
     public MyGriglia getGriglia(){
         return griglia;
+    }
+    
+    /**
+     * Blocca il bot e modifica il testo del bottone
+     * @author Luigi Fiorelli
+     */
+    private void setOffThread(){
+        bAutoGame.setText(LABEL_BOT_AVVIA);
+        aG.off();
+    }
+    
+    /**
+     * Avvia il bot e modifica il bottone
+     * @author Luigi Fiorelli
+     */
+    private void setOnThread(){
+        bAutoGame.setText(LABEL_BOT_FERMA);
+        aG.on();
     }
 }
