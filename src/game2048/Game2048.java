@@ -44,7 +44,7 @@ public class Game2048 extends Application {
         root.widthProperty().addListener(resize);
         root.heightProperty().addListener(resize);
 
-        Scene scene = new Scene(root, 600, 720);
+        Scene scene = new Scene(root, 600, 690);
         Font Roboto = Font.loadFont(getClass().getResourceAsStream("/resources/font/RobotoLight.ttf"), 20);
         scene.getStylesheets().add("game2048/game.css");
 
@@ -66,7 +66,7 @@ public class Game2048 extends Application {
         //primaryStage.initStyle(StageStyle.UNDECORATED);  //prova per il borderless
         primaryStage.setMinWidth(gameBounds.getWidth());
         primaryStage.setMinHeight(gameBounds.getHeight());
-                primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() { /* Chiude il programma alla pressione del pulsante X*/
             @Override
             public void handle(WindowEvent event) {
                 System.exit(0);

@@ -1,11 +1,9 @@
-
 package giocatoreAutomatico.event;
 
 import java.util.EventObject;
 
 /**
- *
- * @author Luigi
+ * @author Luigi Fiorelli
  */
 public class BotEvent extends EventObject{
     private int r;

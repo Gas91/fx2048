@@ -1,6 +1,7 @@
-package giocatoreAutomatico;
+package giocatoreAutomatico.player;
 
 import game2048.Location;
+import giocatoreAutomatico.Griglia;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;

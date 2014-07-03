@@ -1,7 +1,7 @@
 package game2048;
 
 import giocatoreAutomatico.AutoGame;
-import giocatoreAutomatico.MyGriglia;
+import giocatoreAutomatico.player.MyGriglia;
 import giocatoreAutomatico.event.BotEvent;
 import giocatoreAutomatico.event.BotEventListener;
 import java.util.ArrayList;
