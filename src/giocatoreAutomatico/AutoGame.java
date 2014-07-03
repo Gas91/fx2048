@@ -1,41 +1,43 @@
-
 package giocatoreAutomatico;
 
 import giocatoreAutomatico.event.*;
 import javax.swing.event.EventListenerList;
-/**
+
+/** 
+ * Questa classe è un thread che ogni tot ms fa partire l'EventListener che gli viene passato
  * @author Luigi Fiorelli
  */
 public class AutoGame implements Runnable{
     
     /** Determina quanti <b>millisecondi</b> passano tra una mossa e l'altra del bot */
-    private final int TIME_DELAY_BOT = 250;     
-    private final EventListenerList listeners;
+    private final int TIME_DELAY_BOT = 250;
+    /** Lista degli eventi da far partire ogni <b>TIME_DELAY_BOT</b> ms */
+    private final EventListenerList listeners = new EventListenerList();;
     /** Questa variabile determina lo stato di esecuzione del thread:
-     * <UL>
-     * <LI><b>Valore 0</b> Il thread è disattivato e non è mai stato attivato</LI>
-     * <LI><b>Valore 1</b> Il thread è attivo</LI>
-     * <LI><b>Valore 2</b> Il thread è disattivato</LI>
-     * </UL>
+     * <UL><LI>Valore <b>0</b>: Il thread è disattivato e non è mai stato attivato</LI>
+     * <LI>Valore <b>1</b>: Il thread è attivo</LI>
+     * <LI>Valore <b>2</b>: Il thread è disattivato</LI></UL>
      */
     private int stato = 0;
     
-    public AutoGame(){
-        listeners = new EventListenerList();
-    }
-    
     @Override
+    /** 
+     * Metodo del thread che viene eseguito all'infinito durante la vita del thread stesso.
+     * Ad ogni ciclo controlla lo <b>stato</b>, e se questo è pari a <B>1</B> (thread abilitato) fa partire l'evento; 
+     * dopo attende <B>TIME_DELAY_BOT</B> ms
+     */
     public void run() {
         while(true){
             if(stato==1){
                 fireNewDirection(1);
-            }
-            Attendi.ms(TIME_DELAY_BOT);
-        }
-        
-    }
+                Attendi.ms(TIME_DELAY_BOT);
+            } else {
+                Attendi.ms(10);
+            } //end if
+        }//end while
+    }//end run
     
-    /**
+    /** 
      * Disabilita il thread
      */
     public void off(){
@@ -58,7 +60,7 @@ public class AutoGame implements Runnable{
     }
     
     /**
-     * Richiama l'evento
+     * Fa partire gli eventi che gli sono stati passati
      */
     private void fireNewDirection(int move){
         BotEvent event = new BotEvent(this, move);
