@@ -32,6 +32,7 @@ public class Game2048 extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        
         gameManager = new GameManager();
         gameBounds = gameManager.getLayoutBounds();
 
@@ -45,6 +46,7 @@ public class Game2048 extends Application {
         root.heightProperty().addListener(resize);
 
         Scene scene = new Scene(root, 600, 690);
+        gameManager.setMyScene(scene);
         Font Roboto = Font.loadFont(getClass().getResourceAsStream("/resources/font/RobotoLight.ttf"), 20);
         scene.getStylesheets().add("game2048/game.css");
 
@@ -72,6 +74,7 @@ public class Game2048 extends Application {
                 System.exit(0);
             }
         });
+
         primaryStage.show();
     }
     
@@ -80,6 +83,7 @@ public class Game2048 extends Application {
     }
     
     private void addKeyHandler(Scene scene) {
+        
         scene.setOnKeyPressed(ke -> {
             KeyCode keyCode = ke.getCode();
             if (keyCode.equals(KeyCode.S)) {

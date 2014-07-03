@@ -1,9 +1,9 @@
 package game2048;
 
 import giocatoreAutomatico.AutoGame;
-import giocatoreAutomatico.player.MyGriglia;
 import giocatoreAutomatico.event.BotEvent;
 import giocatoreAutomatico.event.BotEventListener;
+import giocatoreAutomatico.player.MyGriglia;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,6 +34,7 @@ import javafx.event.EventType;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -272,6 +273,10 @@ public class GameManager extends Group {
         });
 
         return foundMergeableTile.getValue();
+    }
+        
+    public void setMyScene(Scene sc){
+        l.setMyScene(sc);
     }
 
     private void createScore() {

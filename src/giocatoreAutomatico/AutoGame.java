@@ -9,7 +9,7 @@ import javax.swing.event.EventListenerList;
 public class AutoGame implements Runnable{
     
     /** Determina quanti <b>millisecondi</b> passano tra una mossa e l'altra del bot */
-    private final int TIME_DELAY_BOT = 500;     
+    private final int TIME_DELAY_BOT = 250;     
     private final EventListenerList listeners;
     /** Questa variabile determina lo stato di esecuzione del thread:
      * <UL>

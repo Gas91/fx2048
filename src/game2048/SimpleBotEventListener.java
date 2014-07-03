@@ -2,67 +2,76 @@
 package game2048;
 
 
+import com.sun.javafx.robot.FXRobot;
+import com.sun.javafx.robot.FXRobotFactory;
 import giocatoreAutomatico.Attendi;
 import giocatoreAutomatico.GiocatoreAutomatico;
 import giocatoreAutomatico.event.BotEvent;
 import giocatoreAutomatico.event.BotEventListener;
 import java.awt.AWTException;
-import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 
 /**
- *
+ * Questa classe si preoccupa di gestire l'evento del thread e, quindi, la mossa successiva da eseguire
  * @author Luigi Fiorelli
  */
 public class SimpleBotEventListener implements BotEventListener{
+    private Scene scene;
     private GameManager gM;
     private GiocatoreAutomatico gA;
+    private FXRobot robot;
     public SimpleBotEventListener(GameManager gM){
         this.gM = gM;
+        //this.scene = this.gM.getMyScene();
+        //if(scene == null) System.out.print("lol8\n");
+        
         try {
             gA = GiocatoreAutomatico.getGiocatoreAutomatico();
         } catch (Exception ex) {
             Logger.getLogger(SimpleBotEventListener.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void setMyScene(Scene sc){
+        this.scene = sc;
+        robot = FXRobotFactory.createRobot(this.scene);
+    }
 
     @Override
     public void botNewDirectiondEvent(BotEvent e) {
         int m = gA.prossimaMossa(gM.getGriglia()); //Scelgo la mossa successiva
         System.out.println("x"+m);
-        try {
-            Robot robot = new Robot();
+            
             switch(m){
                 case 0:
                     //gM.move(Direction.UP);
-                    robot.keyPress(KeyEvent.VK_UP);
+                    robot.keyPress(KeyCode.UP);
                     Attendi.ms(50);
-                    robot.keyRelease(KeyEvent.VK_UP);
+                    robot.keyRelease(KeyCode.UP);
                 break;
                 case 1:
                     //gM.move(Direction.RIGHT);
-                    robot.keyPress(KeyEvent.VK_RIGHT);
+                    robot.keyPress(KeyCode.RIGHT);
                     Attendi.ms(50);
-                    robot.keyRelease(KeyEvent.VK_RIGHT);
+                    robot.keyRelease(KeyCode.RIGHT);
                 break;
                 case 2:
                     //gM.move(Direction.LEFT);
-                    robot.keyPress(KeyEvent.VK_LEFT);
+                    robot.keyPress(KeyCode.LEFT);
                     Attendi.ms(50);
-                    robot.keyRelease(KeyEvent.VK_LEFT);
+                    robot.keyRelease(KeyCode.LEFT);
                 break;
                 default:
                     //gM.move(Direction.valueFor(KeyCode.DOWN));
-                    robot.keyPress(KeyEvent.VK_DOWN);
+                    robot.keyPress(KeyCode.DOWN);
                     Attendi.ms(50);
-                    robot.keyRelease(KeyEvent.VK_DOWN);
+                    robot.keyRelease(KeyCode.DOWN);
                 break;
             }
-        } catch (AWTException e2) {
-            e2.printStackTrace();
-        }
+       }    
     }
-}
+
