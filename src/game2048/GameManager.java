@@ -290,31 +290,32 @@ public class GameManager extends Group {
         
         VBox vAuto = new VBox(); /*VBox per il bottone di gioco automatico*/
         vAuto.setAlignment(Pos.CENTER); 
-        Button b = new Button(); /*Bottone per il gioco automatico*/
-        b.setText("Avvia Auto");
+        Button bAutoGame = new Button(); /*Bottone per il gioco automatico*/
+        bAutoGame.setText("Avvia Auto");
+        bAutoGame.getStyleClass().addAll("bAutoGame");
         GameManager gM = this;
         aG = new AutoGame();
         l = new SimpleBotEventListener(gM);
         aG.addBotEventListener(l);
         thAG = new Thread(aG);
-        b.setOnAction(new EventHandler<ActionEvent>() {
+        bAutoGame.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 switch(aG.getStato()){
                     case 0:
                         System.out.println("Il giocatore automatico è partito!");
-                        b.setText("Stoppa Auto");
+                        bAutoGame.setText("Stoppa Auto");
                         aG.on();
                         thAG.start();
                     break;
                     case 1:
                         System.out.println("Il giocatore automatico è stato bloccato!");
-                        b.setText("Avvia Auto");
+                        bAutoGame.setText("Avvia Auto");
                         aG.off();
                     break;
                     case 2:
                         System.out.println("Il giocatore automatico è partito!");
-                        b.setText("Stoppa Auto");
+                        bAutoGame.setText("Stoppa Auto");
                         aG.on();
                     break;
                 }
@@ -322,7 +323,7 @@ public class GameManager extends Group {
 
             }
         });
-        vAuto.getChildren().add(b);
+        vAuto.getChildren().add(bAutoGame);
 
         VBox vScore = new VBox();
         vScore.setAlignment(Pos.CENTER);
