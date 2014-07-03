@@ -15,29 +15,73 @@ import java.util.Random;
 public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
     
     private Random r = new Random(); 
-    private Griglia g;
-    
+    private static Griglia g = new MyGriglia();
+    private static Griglia preG =  new MyGriglia(); //Griglia di appoggio                               //SCOMMENTARE PER TEST MODE
+    private int mosse=0;  //conta mosse
+    private int mossaEseguita=0; 
     @Override
     /**
      * Genera la mossa successiva in base alla griglia
      * @return Restituisce un intero che indica la mossa successiva. 0=SU 1=DX 2=SX 3=GIU
      */
-    public int prossimaMossa(Griglia g) {
-        this.g = g;
+    public int prossimaMossa(Griglia griglia) {
+        
+        //Ricordiamoci di fare i contrlli per evitare che la griglia sia vuota (ad esempio al primo turno)
+        
+
+                           //associo a preG la vecchia griglia
+                           //ottengo dalla funzione la nuova griglia
+    
+        
         int i;
         int j;
         Location loc;
         Tile tile;
-        System.out.println("aaaa");
+                //SCOMMENTARE PER TEST MODE
+        if (this.mosse==0) {                    //se è il primo giro,inizializzo la griglia                 
         for(i=0;i<4;i++){
             for(j=0;j<4;j++){
-                loc = new Location(j,i);
-                System.out.print(g.get(loc));
+                loc = new Location(j,i); //x,y
+                preG.put(loc,griglia.get(loc));
+                g.put(loc, griglia.get(loc));
+            }
+        }
+            } else {
+            for(i=0;i<4;i++){
+                for(j=0;j<4;j++){
+                    loc = new Location(j,i); //x,y
+                    preG.put(loc,g.get(loc));
+                    g.put(loc, griglia.get(loc));
+                }
+            }
+        }        
+
+        for(i=0;i<4;i++){
+            for(j=0;j<4;j++){
+                loc = new Location(j,i); //x,y
+                if (preG.get(loc) != g.get(loc)) this.mossaEseguita=1;     //SCOMMENTARE PER TEST MODE
+                System.out.print(" " +g.get(loc));
+                System.out.print( "|" + preG.get(loc)+ " ");                         //SCOMMENTARE PER TEST MODE
+                
             }
             System.out.println("");
         }
         System.out.println("zzzz");
-        return r.nextInt(4);
+        
+        
+        
+                                                                            //SCOMMENTARE PER TEST MODE
+        if (this.mossaEseguita==1){
+            this.mossaEseguita=0;
+            this.mosse++;
+            return r.nextInt(2);
+        }
+        this.mosse++;
+        return r.nextInt(2)+2;
+        
+        //return r.nextInt(4);
+        
+        
     }
     
     /**
@@ -45,7 +89,9 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
      * @param move determina se la mossa richiesta è possibile 0=SU 1=DX 2=SX 3=GIU
      * @return restituisce 1 se è possibile, 0 se non è possibile
      */
+    /*
     private int isPossibile(int move){
+        
         return 1;
-    }
+    }*/
 }
