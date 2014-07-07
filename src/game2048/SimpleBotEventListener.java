@@ -8,8 +8,6 @@ import giocatoreAutomatico.Attendi;
 import giocatoreAutomatico.GiocatoreAutomatico;
 import giocatoreAutomatico.event.BotEvent;
 import giocatoreAutomatico.event.BotEventListener;
-import java.awt.AWTException;
-import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.Scene;
@@ -26,9 +24,6 @@ public class SimpleBotEventListener implements BotEventListener{
     private FXRobot robot;
     public SimpleBotEventListener(GameManager gM){
         this.gM = gM;
-        //this.scene = this.gM.getMyScene();
-        //if(scene == null) System.out.print("lol8\n");
-        
         try {
             gA = GiocatoreAutomatico.getGiocatoreAutomatico();
         } catch (Exception ex) {
@@ -46,32 +41,28 @@ public class SimpleBotEventListener implements BotEventListener{
         int m = gA.prossimaMossa(gM.getGriglia()); //Scelgo la mossa successiva
         System.out.println("x"+m);
             
-            switch(m){
-                case 0:
-                    //gM.move(Direction.UP);
-                    robot.keyPress(KeyCode.UP);
-                    Attendi.ms(50);
-                    robot.keyRelease(KeyCode.UP);
-                break;
-                case 1:
-                    //gM.move(Direction.RIGHT);
-                    robot.keyPress(KeyCode.RIGHT);
-                    Attendi.ms(50);
-                    robot.keyRelease(KeyCode.RIGHT);
-                break;
-                case 2:
-                    //gM.move(Direction.LEFT);
-                    robot.keyPress(KeyCode.LEFT);
-                    Attendi.ms(50);
-                    robot.keyRelease(KeyCode.LEFT);
-                break;
-                default:
-                    //gM.move(Direction.valueFor(KeyCode.DOWN));
-                    robot.keyPress(KeyCode.DOWN);
-                    Attendi.ms(50);
-                    robot.keyRelease(KeyCode.DOWN);
-                break;
-            }
-       }    
-    }
+        switch(m){
+            case 0:
+                robot.keyPress(KeyCode.UP);
+                Attendi.ms(50);
+                robot.keyRelease(KeyCode.UP);
+            break;
+            case 1:
+                robot.keyPress(KeyCode.RIGHT);
+                Attendi.ms(50);
+                robot.keyRelease(KeyCode.RIGHT);
+            break;
+            case 2:
+                robot.keyPress(KeyCode.LEFT);
+                Attendi.ms(50);
+                robot.keyRelease(KeyCode.LEFT);
+            break;
+            default:
+                robot.keyPress(KeyCode.DOWN);
+                Attendi.ms(50);
+                robot.keyRelease(KeyCode.DOWN);
+            break;
+        }
+    }    
+}
 
