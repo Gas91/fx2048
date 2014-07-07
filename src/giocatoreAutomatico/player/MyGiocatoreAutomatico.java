@@ -33,20 +33,34 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
         Location loc;
         Tile tile;
         
+        //this.g=griglia;
+        
         for(i=0;i<4;i++){
             for(j=0;j<4;j++){
                 loc = new Location(j,i); //x,y
-                if (this.mosse == 0) {
+                /*if (this.mosse == 0) {
                     preG.put(loc,griglia.get(loc));
                 } else {
                     preG.put(loc,g.get(loc));
-                }
+                }*/
                 g.put(loc, griglia.get(loc));
-                if (preG.get(loc) != g.get(loc)) this.mossaEseguita=1;     //SCOMMENTARE PER TEST MODE
-                /*System.out.print(" " +g.get(loc));
-                System.out.print( "|" + preG.get(loc)+ " ");*/
+                //if (preG.get(loc) != g.get(loc)) this.mossaEseguita=1;     //SCOMMENTARE PER TEST MODE
+                //System.out.print(" " +g.get(loc));
+                //System.out.print( "|" + preG.get(loc)+ " ");
             }
-        }        
+        }      
+        System.out.println("scelta if");
+        if (this.isPossibile(0)==1) return 0;
+        System.out.println("primo if fallito");
+        if (this.isPossibile(1)==1) return 1;
+        System.out.println("secondo if fallito");
+        if (this.isPossibile(2)==1) return 2;
+        System.out.println("terzo if fallito");
+        if (this.isPossibile(3)==1) return 3;
+        System.out.println("quarto if fallito");
+        
+        
+        
         /*
         for(i=0;i<4;i++){
             for(j=0;j<4;j++){
@@ -62,7 +76,7 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
         
         
         
-                                                                            //SCOMMENTARE PER TEST MODE
+          /*                                                                  //SCOMMENTARE PER TEST MODE
         if (this.mossaEseguita==1){
             System.out.println(mossaEseguita);
             this.mossaEseguita=0;
@@ -72,10 +86,10 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
         System.out.println(mossaEseguita);
         this.mosse++;
         return 2;
-        
+        */
         //return r.nextInt(4);
         
-        
+      return 3;  
     }
     
     /**
@@ -86,13 +100,40 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
     
     private int isPossibile(int move){
         
-        int i;
-        int j;
+        int i,j,x,y;
         Location loc;
         
+         
+        for(i=0;i<4;i++){
+            for(j=0;j<4;j++){
+                loc = new Location(j,i); //x,y
+                System.out.print(" " +g.get(loc));
+            }
+            System.out.println("");
+        }
               
      switch (move) {
-         case 0:{ // su
+         
+         
+                  case 0:  // su
+            for(y=1;y<4;y++){// non scorro la prima riga perche devo controllare verso su 
+                for(x=0;x<4;x++){
+                    if (g.get(new Location(x,y))!=-1){ //se la cella non è vuota 
+                        if (g.get(new Location(x,y-1))==-1){ // e quella sopra è vuota
+                            return 1;
+                        }
+                    }
+                    else {
+                        if(g.get(new Location(x,y-1)) == (g.get(new Location(x,y)))) { // esiste una cella qua sopra con lo stesso numero che quindi posso sommare
+                            return 1;
+                        }
+                    }
+                }
+            }
+
+        break;
+         
+        /*case 0:{ // su
          
 
                    for(i=1;i<4;i++){// non scorro la prima riga perche devo controllare verso su
@@ -109,8 +150,8 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
                              }
                       }
      } 
-         break;
-         case 1: { //destra
+         break;*/
+         case 1:  //destra
       
               for(i=0;i<4;i++){
                    for(j=0;j<3;j++){// non scorro l'ultima colonna perche devo controllare verso destra
@@ -125,9 +166,9 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
                     }
               }
              
-         }
+         
          break;
-         case 2: { //sinistra
+         case 2:  //sinistra
             
               
                 for(i=0;i<4;i++){
@@ -145,9 +186,9 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
                 }
              
              
-         }
+         
          break;
-             case 3: { // giu
+             case 3: // giu
                  
                  for(i=0;i<4;i++){
                      for(j=0;j<3;j++){// non scorro l'ultima colonna perche devo controllare verso il basso
@@ -162,7 +203,7 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
                                         
                         }
                     }
-                 }
+                 
          break;
                   }       
               
