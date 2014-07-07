@@ -28,34 +28,26 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
         
         //Ricordiamoci di fare i contrlli per evitare che la griglia sia vuota (ad esempio al primo turno)
         
-
-                           //associo a preG la vecchia griglia
-                           //ottengo dalla funzione la nuova griglia
-    
-        
         int i;
         int j;
         Location loc;
         Tile tile;
-                //SCOMMENTARE PER TEST MODE
-        if (this.mosse==0) {                    //se è il primo giro,inizializzo la griglia                 
+        
         for(i=0;i<4;i++){
             for(j=0;j<4;j++){
                 loc = new Location(j,i); //x,y
-                preG.put(loc,griglia.get(loc));
-                g.put(loc, griglia.get(loc));
-            }
-        }
-            } else {
-            for(i=0;i<4;i++){
-                for(j=0;j<4;j++){
-                    loc = new Location(j,i); //x,y
+                if (this.mosse == 0) {
+                    preG.put(loc,griglia.get(loc));
+                } else {
                     preG.put(loc,g.get(loc));
-                    g.put(loc, griglia.get(loc));
                 }
+                g.put(loc, griglia.get(loc));
+                if (preG.get(loc) != g.get(loc)) this.mossaEseguita=1;     //SCOMMENTARE PER TEST MODE
+                /*System.out.print(" " +g.get(loc));
+                System.out.print( "|" + preG.get(loc)+ " ");*/
             }
         }        
-
+        /*
         for(i=0;i<4;i++){
             for(j=0;j<4;j++){
                 loc = new Location(j,i); //x,y
@@ -66,18 +58,20 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
             }
             System.out.println("");
         }
-        System.out.println("zzzz");
+        System.out.println("zzzz");*/
         
         
         
                                                                             //SCOMMENTARE PER TEST MODE
         if (this.mossaEseguita==1){
+            System.out.println(mossaEseguita);
             this.mossaEseguita=0;
             this.mosse++;
             return r.nextInt(2);
         }
+        System.out.println(mossaEseguita);
         this.mosse++;
-        return r.nextInt(2)+2;
+        return 2;
         
         //return r.nextInt(4);
         
