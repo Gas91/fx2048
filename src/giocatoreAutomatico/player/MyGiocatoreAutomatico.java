@@ -83,9 +83,101 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
      * @param move determina se la mossa richiesta è possibile 0=SU 1=DX 2=SX 3=GIU
      * @return restituisce 1 se è possibile, 0 se non è possibile
      */
-    /*
+    
     private int isPossibile(int move){
         
-        return 1;
-    }*/
+        int i;
+        int j;
+        Location loc;
+        
+              
+     switch (move) {
+         case 0:{ // su
+         
+
+                            for(i=1;i<4;i++){// non scorro la prima riga perche devo controllare verso su
+                                   for(j=0;j<4;j++){
+                                       if (g.get(new Location(i,j))!=-1){ //se la cella non è vuota 
+                                       
+                                           if (g.get(new Location(i-1,j))==-1) // e quella sopra è vuota
+                                           return 1; 
+                                           }
+                                           else if(g.get(new Location(i-1,j)) == (g.get(new Location(i,j))))
+                                               // esiste una cella qua sopra con lo stesso numero che quindi posso sommare
+                                           return 1;
+                                        
+                                    }
+                             }
+                    
+         } 
+         break;
+         case 1: { //destra
+      
+             
+             
+                for(i=0;i<4;i++){
+                                   for(j=0;j<3;j++){// non scorro l'ultima colonna perche devo controllare verso destra
+                                       if (g.get(new Location(i,j))!=-1){ //se la cella non è vuota 
+                                       
+                                           if (g.get(new Location(i,j+1))==-1) // e quella a destra è vuota
+                                           return 1; 
+                                           }
+                                           else if(g.get(new Location(i,j+1)) == (g.get(new Location(i,j))))
+                                               // esiste una cella a dx con lo stesso numero che quindi posso sommare
+                                           return 1;
+                                        
+                                    }
+                             }
+             
+         }
+         break;
+         case 2: { //sinistra
+            
+              
+                for(i=0;i<4;i++){
+                                   for(j=1;j<4;j++){// non scorro l'ultima colonna perche devo controllare verso sinistra
+                                       if (g.get(new Location(i,j))!=-1){ //se la cella non è vuota 
+                                       
+                                           if (g.get(new Location(i,j-1))==-1) // e quella a sinistra è vuota
+                                           return 1; 
+                                           }
+                                           else if(g.get(new Location(i,j-1)) == (g.get(new Location(i,j))))
+                                               // esiste una cella a sx con lo stesso numero che quindi posso sommare
+                                           return 1;
+                                        
+                                    }
+                             }
+             
+             
+         }
+         break;
+             case 3: { // giu
+                 
+                 for(i=0;i<4;i++){
+                                   for(j=0;j<3;j++){// non scorro l'ultima colonna perche devo controllare verso il basso
+                                       if (g.get(new Location(i,j))!=-1){ //se la cella non è vuota 
+                                       
+                                           if (g.get(new Location(i+1,j))==-1) // e quella in basso è vuota
+                                           return 1; 
+                                           }
+                                           else if(g.get(new Location(i+1,j)) == (g.get(new Location(i,j))))
+                                               // esiste una cella in basso con lo stesso numero che quindi posso sommare
+                                           return 1;
+                                        
+                                    }
+                             }
+                 
+                 
+                 
+                 
+            
+             }
+         break;
+                  }       
+              
+        
+        
+        
+        return 0;
+    }
 }
