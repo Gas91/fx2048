@@ -49,15 +49,16 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
                 //System.out.print( "|" + preG.get(loc)+ " ");
             }
         }      
-        System.out.println("scelta if");
+        //System.out.println("scelta if");
+        System.out.println("IS possible si 0: "+this.isPossibile(0));
         if (this.isPossibile(0)==1) return 0;
-        System.out.println("primo if fallito");
+        //System.out.println("primo if fallito");
         if (this.isPossibile(1)==1) return 1;
-        System.out.println("secondo if fallito");
+        //System.out.println("secondo if fallito");
         if (this.isPossibile(2)==1) return 2;
-        System.out.println("terzo if fallito");
+        //System.out.println("terzo if fallito");
         if (this.isPossibile(3)==1) return 3;
-        System.out.println("quarto if fallito");
+        //System.out.println("quarto if fallito");
         
         
         
@@ -112,101 +113,74 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
             System.out.println("");
         }
               
-     switch (move) {
-         
-         
-                  case 0:  // su
-            for(y=1;y<4;y++){// non scorro la prima riga perche devo controllare verso su 
-                for(x=0;x<4;x++){
-                    if (g.get(new Location(x,y))!=-1){ //se la cella non è vuota 
-                        if (g.get(new Location(x,y-1))==-1){ // e quella sopra è vuota
+        switch (move) {
+            case 0:  // su corretto
+                for(y=0;y<3;y++){
+                    for(x=0;x<4;x++){
+                        if(g.get(new Location(x,y)) == g.get(new Location(x,y+1)) && g.get(new Location(x,y)) != -1){
+                            System.out.println("looooooool 1 "+g.get(new Location(x,y))+g.get(new Location(x,y+1)) );
                             return 1;
                         }
-                    }
-                    else {
-                        if(g.get(new Location(x,y-1)) == (g.get(new Location(x,y)))) { // esiste una cella qua sopra con lo stesso numero che quindi posso sommare
+                        if( g.get(new Location(x,y)) == -1 &&  g.get(new Location(x,y+1))  != -1 ){
+                            System.out.println("looooooool 2");
                             return 1;
                         }
                     }
                 }
-            }
+                return 0;
 
-        break;
-         
-        /*case 0:{ // su
-         
+            case 1:  //destra bug
+                for(y=0;y<4;y++){
+                     for(x=0;x<3;x++){
+                         
+                         if(g.get(new Location(x,y)) == g.get(new Location(x+1,y)) && g.get(new Location(x,y)) != -1){
+                             System.out.print("aaa1");
+                             return 1;
+                         }
+                         System.out.println("o");
+                         if( g.get(new Location(x,y)) == -1 &&  g.get(new Location(x+1,y))  != -1 ){
+                             System.out.print("aaa1");
+                             return 1;
+                         }
+                         System.out.println("b");
+                     }
+                 }
+            return 0;
+             case 2:  //sinistra bug
 
-                   for(i=1;i<4;i++){// non scorro la prima riga perche devo controllare verso su
-                          for(j=0;j<4;j++){
-                              if (g.get(new Location(i,j))!=-1){ //se la cella non è vuota 
-                                       
-                                  if (g.get(new Location(i-1,j))==-1) // e quella sopra è vuota
-                                           return 1; 
-                               }
-                                  else if(g.get(new Location(i-1,j)) == (g.get(new Location(i,j))))
-                                               // esiste una cella qua sopra con lo stesso numero che quindi posso sommare
-                                           return 1;
-                                        
-                             }
-                      }
-     } 
-         break;*/
-         case 1:  //destra
-      
-              for(i=0;i<4;i++){
-                   for(j=0;j<3;j++){// non scorro l'ultima colonna perche devo controllare verso destra
-                       if (g.get(new Location(i,j))!=-1){ //se la cella non è vuota 
-                                if (g.get(new Location(i,j+1))==-1) // e quella a destra è vuota
-                                           return 1; 
-                        }
-                         else if(g.get(new Location(i,j+1)) == (g.get(new Location(i,j))))
-                                               // esiste una cella a dx con lo stesso numero che quindi posso sommare
-                                           return 1;
-                                        
-                    }
-              }
-             
-         
-         break;
-         case 2:  //sinistra
-            
-              
-                for(i=0;i<4;i++){
-                    for(j=1;j<4;j++){// non scorro l'ultima colonna perche devo controllare verso sinistra
-                        if (g.get(new Location(i,j))!=-1){ //se la cella non è vuota 
-                                       
-                                  if (g.get(new Location(i,j-1))==-1) // e quella a sinistra è vuota
-                                           return 1; 
-                       }
-                       else if(g.get(new Location(i,j-1)) == (g.get(new Location(i,j))))
-                        // esiste una cella a sx con lo stesso numero che quindi posso sommare
-                                           return 1;
-                                        
-                   }
-                }
-             
-             
-         
-         break;
-             case 3: // giu
-                 
-                 for(i=0;i<4;i++){
-                     for(j=0;j<3;j++){// non scorro l'ultima colonna perche devo controllare verso il basso
-                          if (g.get(new Location(i,j))!=-1){ //se la cella non è vuota 
-                                       
-                               if (g.get(new Location(i+1,j))==-1) // e quella in basso è vuota
-                                           return 1; 
+
+                    for(i=0;i<4;i++){
+                        for(j=1;j<4;j++){// non scorro l'ultima colonna perche devo controllare verso sinistra
+                            if (g.get(new Location(i,j))!=-1){ //se la cella non è vuota 
+
+                                      if (g.get(new Location(i,j-1))==-1) // e quella a sinistra è vuota
+                                               return 1; 
                            }
-                          else if(g.get(new Location(i+1,j)) == (g.get(new Location(i,j))))
-                                               // esiste una cella in basso con lo stesso numero che quindi posso sommare
-                                           return 1;
-                                        
+                           else if(g.get(new Location(i,j-1)) == (g.get(new Location(i,j))))
+                            // esiste una cella a sx con lo stesso numero che quindi posso sommare
+                                               return 1;
+
+                       }
+                    }
+
+
+
+             break;
+            case 3: // giu corretto
+                for(y=0;y<3;y++){
+                    for(x=3;x<=0;x--){
+                        if(g.get(new Location(x,y)) == g.get(new Location(x,y-1)) && g.get(new Location(x,y)) != -1){
+                            System.out.println("looooooool 1 "+g.get(new Location(x,y))+g.get(new Location(x,y-1)) );
+                            return 1;
+                        }
+                        if( g.get(new Location(x,y)) == -1 &&  g.get(new Location(x,y-1))  != -1 ){
+                            System.out.println("looooooool 2");
+                            return 1;
                         }
                     }
-                 
-         break;
-                  }       
-              
-    return 0;
+                }
+                return 0;
+        }       
+        return 0;
     }
 }
