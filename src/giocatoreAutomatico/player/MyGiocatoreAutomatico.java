@@ -16,9 +16,6 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
     
     private Random r = new Random(); 
     private static Griglia g = new MyGriglia();
-    private static Griglia preG =  new MyGriglia(); //Griglia di appoggio                               //SCOMMENTARE PER TEST MODE
-    private int mosse=0;  //conta mosse
-    private int mossaEseguita=0; 
     @Override
     /**
      * Genera la mossa successiva in base alla griglia
@@ -27,26 +24,16 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
     public int prossimaMossa(Griglia griglia) {
         
         //Ricordiamoci di fare i contrlli per evitare che la griglia sia vuota (ad esempio al primo turno)
-        
         int i;
         int j;
         Location loc;
-        Tile tile;
-        
+               
         //this.g=griglia;
         
         for(i=0;i<4;i++){
             for(j=0;j<4;j++){
-                loc = new Location(j,i); //x,y
-                /*if (this.mosse == 0) {
-                    preG.put(loc,griglia.get(loc));
-                } else {
-                    preG.put(loc,g.get(loc));
-                }*/
+                loc = new Location(j,i); 
                 g.put(loc, griglia.get(loc));
-                //if (preG.get(loc) != g.get(loc)) this.mossaEseguita=1;     //SCOMMENTARE PER TEST MODE
-                //System.out.print(" " +g.get(loc));
-                //System.out.print( "|" + preG.get(loc)+ " ");
             }
         }      
         //System.out.println("scelta if");
@@ -59,36 +46,6 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
         //System.out.println("terzo if fallito");
         if (this.isPossibile(3)==1) return 3;
         //System.out.println("quarto if fallito");
-        
-        
-        
-        /*
-        for(i=0;i<4;i++){
-            for(j=0;j<4;j++){
-                loc = new Location(j,i); //x,y
-                if (preG.get(loc) != g.get(loc)) this.mossaEseguita=1;     //SCOMMENTARE PER TEST MODE
-                System.out.print(" " +g.get(loc));
-                System.out.print( "|" + preG.get(loc)+ " ");                         //SCOMMENTARE PER TEST MODE
-                
-            }
-            System.out.println("");
-        }
-        System.out.println("zzzz");*/
-        
-        
-        
-          /*                                                                  //SCOMMENTARE PER TEST MODE
-        if (this.mossaEseguita==1){
-            System.out.println(mossaEseguita);
-            this.mossaEseguita=0;
-            this.mosse++;
-            return r.nextInt(2);
-        }
-        System.out.println(mossaEseguita);
-        this.mosse++;
-        return 2;
-        */
-        //return r.nextInt(4);
         
       return 3;  
     }
