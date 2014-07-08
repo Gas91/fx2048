@@ -16,6 +16,7 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
     
     private Random r = new Random(); 
     private static Griglia g = new MyGriglia();
+    int pre=0;
     @Override
     /**
      * Genera la mossa successiva in base alla griglia
@@ -26,7 +27,7 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
         //Ricordiamoci di fare i contrlli per evitare che la griglia sia vuota (ad esempio al primo turno)
         int i;
         int j;
-        int pre=0;
+
         Location loc;
                
         //this.g=griglia;
