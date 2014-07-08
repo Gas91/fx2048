@@ -26,6 +26,7 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
         //Ricordiamoci di fare i contrlli per evitare che la griglia sia vuota (ad esempio al primo turno)
         int i;
         int j;
+        int pre=0;
         Location loc;
                
         //this.g=griglia;
@@ -35,17 +36,31 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
                 loc = new Location(j,i); 
                 g.put(loc, griglia.get(loc));
             }
-        }      
-        //System.out.println("scelta if");
-        System.out.println("IS possible si 0: "+this.isPossibile(0));
-        if (this.isPossibile(0)==1) return 0;
-        //System.out.println("primo if fallito");
-        if (this.isPossibile(1)==1) return 1;
-        //System.out.println("secondo if fallito");
-        if (this.isPossibile(2)==1) return 2;
-        //System.out.println("terzo if fallito");
-        if (this.isPossibile(3)==1) return 3;
-        //System.out.println("quarto if fallito");
+        }
+        
+        if(pre==2){
+            if (this.isPossibile(1)==1){
+                pre = 1;
+                return 1;
+            }
+        }
+        
+        if (this.isPossibile(0)==1){
+            pre = 0;
+            return 0;
+        }
+        if (this.isPossibile(1)==1){
+            pre = 1;
+            return 1;
+        }
+        if (this.isPossibile(2)==1){
+            pre = 2;
+            return 2;
+        }
+        if (this.isPossibile(3)==1){
+            pre = 3;
+            return 3;
+        }
         
       return 3;  
     }
