@@ -117,25 +117,23 @@ System.out.println("dx1");
             
              case 2:{  //sinistra bugf
                 
-
-System.out.println("sx1");
+                System.out.println("sx1");
                     for(i=0;i<4;i++){
-                                               
-                        for(j=1;j<4;j++){// non scorro l'ultima colonna perche devo controllare verso sinistra
-                            a=g.get(new Location(i,j-1));
-                            b=g.get(new Location(i,j));
+                      for(j=1;j<4;j++){// non scorro l'ultima colonna perche devo controllare verso sinistra
+                            a=g.get(new Location(i,j));
+                            b=g.get(new Location(i,j-1));
                         
-                        if (g.get(new Location(i,j))!=-1){ //se la cella non è vuota 
-System.out.println("sx2");
-                                      if (g.get(new Location(i,j-1))==-1) // e quella a sinistra è vuota
+                        if (a != -1){ //se la cella non è vuota 
+                                System.out.println("sx2");
+                                      if (b == -1) // e quella a sinistra è vuota
                                                return 1; 
-                            }
+                            
                            else if(a == b)
                             // esiste una cella a sx con lo stesso numero che quindi posso sommare
                                System.out.println("sx3");
                                                return 1;
  }
-                       }
+                       }}
                   return 0;  }
 
             
