@@ -16,9 +16,6 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
     
     private Random r = new Random(); 
     private static Griglia g = new MyGriglia();
-    private static Griglia preG =  new MyGriglia(); //Griglia di appoggio                               //SCOMMENTARE PER TEST MODE
-    private int mosse=0;  //conta mosse
-    private int mossaEseguita=0; 
     @Override
     /**
      * Genera la mossa successiva in base alla griglia
