@@ -14,8 +14,8 @@ import java.util.Random;
  */
 public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
     
-    private Random r = new Random(); 
-    private static Griglia g = new MyGriglia();
+    private final Random r = new Random(); 
+    private final Griglia g = new MyGriglia();
     int pre=0;
     @Override
     /**
@@ -23,14 +23,10 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
      * @return Restituisce un intero che indica la mossa successiva. 0=SU 1=DX 2=SX 3=GIU
      */
     public int prossimaMossa(Griglia griglia) {
-        
-        //Ricordiamoci di fare i contrlli per evitare che la griglia sia vuota (ad esempio al primo turno)
-        int i;
-        int j;
-
+        int i,j;
         Location loc;
-               
-        //this.g=griglia;
+        
+        g.clear();
         
         for(i=0;i<4;i++){
             for(j=0;j<4;j++){
@@ -71,7 +67,6 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
      * @param move determina se la mossa richiesta è possibile 0=SU 1=DX 2=SX 3=GIU
      * @return restituisce 1 se è possibile, 0 se non è possibile
      */
-    
     private int isPossibile(int move){
         
         int i,j,x,y;
