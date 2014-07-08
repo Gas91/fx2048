@@ -102,6 +102,7 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
     private int isPossibile(int move){
         
         int i,j,x,y;
+        int a,b;
         Location loc;
         
          
@@ -118,63 +119,79 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
                 for(y=0;y<3;y++){
                     for(x=0;x<4;x++){
                         if(g.get(new Location(x,y)) == g.get(new Location(x,y+1)) && g.get(new Location(x,y)) != -1){
-                            System.out.println("looooooool 1 "+g.get(new Location(x,y))+g.get(new Location(x,y+1)) );
+                            System.out.println("alto 1 "+g.get(new Location(x,y))+g.get(new Location(x,y+1)) );
                             return 1;
                         }
                         if( g.get(new Location(x,y)) == -1 &&  g.get(new Location(x,y+1))  != -1 ){
-                            System.out.println("looooooool 2");
+                            System.out.println("alto 2");
                             return 1;
                         }
                     }
                 }
                 return 0;
 
-            case 1:  //destra bug
-                for(y=0;y<4;y++){
-                     for(x=0;x<3;x++){
-                         
-                         if(g.get(new Location(x,y)) == g.get(new Location(x+1,y)) && g.get(new Location(x,y)) != -1){
-                             System.out.print("aaa1");
-                             return 1;
-                         }
-                         System.out.println("o");
-                         if( g.get(new Location(x,y)) == -1 &&  g.get(new Location(x+1,y))  != -1 ){
-                             System.out.print("aaa1");
-                             return 1;
-                         }
-                         System.out.println("b");
-                     }
-                 }
-            return 0;
-             case 2:  //sinistra bug
+            case 1:{  //destra bug
+                
 
+System.out.println("dx1");
+                    for(y=0;y<4;y++){                               
+                        for(x=0;x<3;x++){// non scorro l'ultima colonna perche devo controllare verso destra
+                            a= g.get(new Location(x,y));
+                            b= g.get(new Location(x+1,y));
+                            System.out.println(x+"|"+y);
+                            System.out.println(a+"-->"+b);
+                        
+                            if (a != -1){ //se la cella non è vuota 
+                                System.out.println("dx2");
+                                      if (b == -1){ // e quella a destra è vuota
+                                               
+                                      System.out.println("dx22");
+                                      return 1; 
+                                      }
+                            
+                           if(a == b){
+                            // esiste una cella a dx con lo stesso numero che quindi posso sommare
+                               System.out.println("dx3");
+                                               return 1; }
+ }
+                       }}
+                  return 0;  }
 
+            
+             case 2:{  //sinistra bugf
+                
+
+System.out.println("sx1");
                     for(i=0;i<4;i++){
+                                               
                         for(j=1;j<4;j++){// non scorro l'ultima colonna perche devo controllare verso sinistra
-                            if (g.get(new Location(i,j))!=-1){ //se la cella non è vuota 
-
+                            a=g.get(new Location(i,j-1));
+                            b=g.get(new Location(i,j));
+                        
+                        if (g.get(new Location(i,j))!=-1){ //se la cella non è vuota 
+System.out.println("sx2");
                                       if (g.get(new Location(i,j-1))==-1) // e quella a sinistra è vuota
                                                return 1; 
-                           }
-                           else if(g.get(new Location(i,j-1)) == (g.get(new Location(i,j))))
+                            }
+                           else if(a == b)
                             // esiste una cella a sx con lo stesso numero che quindi posso sommare
+                               System.out.println("sx3");
                                                return 1;
-
+ }
                        }
-                    }
+                  return 0;  }
 
+            
 
-
-             break;
             case 3: // giu corretto
                 for(y=0;y<3;y++){
                     for(x=3;x<=0;x--){
                         if(g.get(new Location(x,y)) == g.get(new Location(x,y-1)) && g.get(new Location(x,y)) != -1){
-                            System.out.println("looooooool 1 "+g.get(new Location(x,y))+g.get(new Location(x,y-1)) );
+                            System.out.println("basso 1 "+g.get(new Location(x,y))+g.get(new Location(x,y-1)) );
                             return 1;
                         }
                         if( g.get(new Location(x,y)) == -1 &&  g.get(new Location(x,y-1))  != -1 ){
-                            System.out.println("looooooool 2");
+                            System.out.println("basso 2");
                             return 1;
                         }
                     }
