@@ -28,6 +28,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -292,7 +293,9 @@ public class GameManager extends Group {
         hFill.setAlignment(Pos.CENTER);
         
         VBox vAuto = new VBox(); /*VBox per il bottone di gioco automatico*/
-        vAuto.setAlignment(Pos.CENTER); 
+        
+        vAuto.setAlignment(Pos.BOTTOM_RIGHT); 
+        
         bAutoGame.getStyleClass().addAll("bAutoGame");
         GameManager gM = this;
         aG = new AutoGame();
