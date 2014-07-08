@@ -18,7 +18,7 @@
 }
 .points {
     -fx-font-size: 30px;
-    -fx-text-fill: rgba(119, 110, 101, 0.9);
+    -fx-text-fill: rgba(255, 255, 255, 0.9);
 }
 .backGrid {
     -fx-background-color: #4d4d4d;
@@ -105,8 +105,8 @@
 .try { 
     -fx-font-size: 30px;
     -fx-text-fill: white;
-    -fx-background-color: #8f7a66;
-    -fx-border-color: #8f7a66; 
+    -fx-background-color: #0099CC;
+    -fx-border-color: #0099CC; 
     -fx-border-width: 2; 
     -fx-background-radius: 3;
     -fx-border-radius: 3;
