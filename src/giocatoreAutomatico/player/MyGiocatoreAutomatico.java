@@ -41,11 +41,11 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
             }    
         
             
-        if (pre!=1 && this.isPossibile(0)==1){
+        if (this.isPossibile(0)==1){
             pre = 0;
             return 0;
         }
-        if (pre!=0 && this.isPossibile(1)==1){
+        if (this.isPossibile(1)==1){
             pre = 1;
             return 1;
         }
@@ -96,6 +96,7 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
                         }
                     }
                 }
+                System.out.print("0 - ");
                 return 0;
 
             case 1:{  //destra bug
@@ -117,6 +118,7 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
  }
                     }
                 }
+                System.out.print("0 - ");
                 return 0;  }
             
              case 2:  //sinistra bugf
