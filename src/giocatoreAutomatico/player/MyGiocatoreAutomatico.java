@@ -35,18 +35,17 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
             }
         }
         
-        if(pre==2){
-            if (this.isPossibile(1)==1){
+        if ( pre==2 && this.isPossibile(1)==1){
                 pre = 1;
                 return 1;
-            }
-        }
+            }    
         
-        if (this.isPossibile(0)==1){
+            
+        if (pre!=1 && this.isPossibile(0)==1){
             pre = 0;
             return 0;
         }
-        if (this.isPossibile(1)==1){
+        if (pre!=0 && this.isPossibile(1)==1){
             pre = 1;
             return 1;
         }
