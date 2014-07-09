@@ -58,7 +58,7 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
             return 3;
         }
         
-      return 3;  
+      return r.nextInt(4);  
     }
     
     /**
