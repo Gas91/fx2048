@@ -62,7 +62,7 @@ public class Game2048 extends Application {
             scene.setCursor(Cursor.NONE);
         }
 
-        primaryStage.setTitle("2048HOLO");
+        primaryStage.setTitle("2048Holo");
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image("resources/icons/2048.png")); //icona programma
         //primaryStage.initStyle(StageStyle.UNDECORATED);  //prova per il borderless
