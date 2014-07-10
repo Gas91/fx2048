@@ -28,7 +28,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
+
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -286,16 +286,16 @@ public class GameManager extends Group {
     private void createScore() {
         Label lblTitle = new Label("2048");
         lblTitle.getStyleClass().add("title");
-        Label lblSubtitle = new Label(" Holo");
-        lblSubtitle.getStyleClass().add("subtitle");
         HBox hFill = new HBox();
         HBox.setHgrow(hFill, Priority.ALWAYS);
         hFill.setAlignment(Pos.CENTER);
         
         VBox vAuto = new VBox(); /*VBox per il bottone di gioco automatico*/
         
-        vAuto.setAlignment(Pos.BOTTOM_RIGHT); 
+        vAuto.setAlignment(Pos.CENTER); 
         
+        Label lblSubtitle = new Label("Holo");
+        lblSubtitle.getStyleClass().add("subtitle");
         bAutoGame.getStyleClass().addAll("bAutoGame");
         GameManager gM = this;
         aG = new AutoGame();
@@ -322,7 +322,9 @@ public class GameManager extends Group {
                 }
             }
         });
-        vAuto.getChildren().add(bAutoGame);
+        
+        vAuto.setPrefSize(100, TOP_HEIGHT);
+        vAuto.getChildren().addAll(lblSubtitle, bAutoGame);
 
         VBox vScore = new VBox();
         vScore.setAlignment(Pos.CENTER);
@@ -333,7 +335,7 @@ public class GameManager extends Group {
         lblScore.textProperty().bind(gameScoreProperty.asString());
         vScore.getChildren().addAll(lblTit, lblScore);
         
-        hTop.getChildren().addAll(lblTitle, lblSubtitle, vAuto, hFill, vScore);
+        hTop.getChildren().addAll(lblTitle, vAuto, hFill, vScore);
         hTop.setMinSize(GRID_WIDTH, TOP_HEIGHT);
         hTop.setPrefSize(GRID_WIDTH, TOP_HEIGHT);
         hTop.setMaxSize(GRID_WIDTH, TOP_HEIGHT);
