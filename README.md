@@ -1,31 +1,62 @@
-fx2048
-======
+##Progetto di Programmazione 2 (Gruppo 1):
+####Fork del clone di 2048 in JavaFX modificato dagli studenti del Secondo Anno di UNICA
+- Luigi Fiorelli - 
+- Marco Loriga - Grafica, Algoritmo di Gioco, Layout
+- Dario Puligheddu -
 
-The game 2048 built using JavaFX and Java 8. This is a fork based on the
-Javascript version: https://github.com/gabrielecirulli/2048
+##Introduzione a 2048Holo:
+Progetto finale per il corso di Programmazione 2, prevedeva la possibilità di implementare un giocatore automatico interfacciabile ad una versione modificata del clone del famoso gioco "2048" realizzato da B. Borges in JavaFX.
+La grafica è stata modificata seguendo uno stile più moderno ed elegante.
+Nonostante le svariate versioni di algoritmi per la soluzione del puzzle game, ne abbiamo applicato uno semplice ed efficace, il quale sarà spiegato nelle prossime righe.
 
-Building fx2048
-====================
 
-You will need [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
-and [ANT](http://ant.apache.org/) installed to build the project. Just
-execute ant in the project root.
+##Il rework grafico:
+Il progetto originale era un fedele clone di 2048, ricalcando sia le meccaniche di gioco, sia l'aspetto della UI. 
+Per dargli un tocco di originalità e distaccamento dell'originale, abbiamo apportato delle modifiche grafiche sufficientemente importanti per regalare al gioco un nuovo aspetto, ma per niente invadenti, permettendo al progetto originale di essere sempre compatibile con altri giocatori automatici utilizzanti le stesse interfacce.
 
-```bash
-ant
-```
+Da qui il nome "2048 Holo".
 
-Running fx2048
-===================
+Innanzitutto, è stata realizzata un icona per il programma, poichè ne era sprovvisto; dopodichè si è deciso in comune accordo di modificare il foglio di stile in modo da ricalcare in modo più fedele possibile lo stile "Holo", diffuso sulla piattaforma Android dalla versione 4.0 Ice Cream Sandwitch ed evoluto fin'oggi.
+Lo stile prevede una tonalità di sfondo grigio scuro, con elementi grigio chiaro; si può notare la modifica del subtitle da "FX" a "Holo", del famoso colore azzurro. 
+I tile sono stati colorati secondo la guida colori ufficiale Android, reperibile qui: http://developer.android.com/design/style/color.html 
+Abbiamo dato un aspetto più minimalistico eliminando (ricolorando, per la precisione) lo sfondo della griglia di gioco, ed utilizzando il font "Roboto Light", font utilizzato nelle interfacce Android (pre Android L) estremamente sottile e semplicistico, ma elegante.
+Ogni tile utilizza il suddetto font, di colore bianco. L'utilizzo di colori uguali per tile uguali permette di giocare anche "a colpo d'occhio", senza effettivamente controllare il valore dei tile.
+Il bottone del giocatore automatico, "Avvia Bot", è stato inserito nello stesso Box del subtitle, per permettere il loro incolonnamento, disposizione molto più pulita della precedente (bottone tra subtitle e score).
 
-After you've built the project you can run this with a simple java command.
+##L'intelligenza Artificiale
+Inizialmente il giocatore automatico utilizzava un algoritmo estremamente semplice: mosse a caso.
+Si è deciso, poi, di studiare più approfonditamente l'algoritmo, implementandone diverse versioni: alcune troppo complesse per il punteggio effettivo finale, alcune troppo semplici e troppo poco fruttuose.
+In seguito a diverse ricerche, abbiamo scelto un algoritmo semplice ma funzionale: facendo un breve sondaggio, abbiamo notato che uno dei metodi più semplici per avvicinarsi alla vittoria in 2048 consiste nel tenere in un angolo a scelta (in alto a destra, nel nostro caso) la tile col valore maggiore, e accatastare diagonalmente ad essa i tile di valori via via inferiori, fino a formare una sorta di scacchiera sbilanciata.
 
-```bash
-java -jar dist/Game2048.jar
-```
+L'IA del giocatore automatico scopre, interrogando "isPossibile", quali mosse è possibile fare, e le effettua, ciclando il controllo, seguendo questa priorità:
 
-License
-===================
+	-se possibile, muovo le tile verso l'alto
+	-se possibile e non ho potuto effettuare la mossa precedente, muovo le tile verso destra
+	
+Queste sono denominate "mosse di gioco", poichè sono le mosse principali da fare. 
+Capita, però, che non sempre queste mosse si possano eseguire, di conseguenza "bloccando" la partita; si utilizzano, quindi, le "mosse di sblocco":
 
-The project is licensed under GPL 3. See [LICENSE](https://raw.githubusercontent.com/brunoborges/fx2048/master/LICENSE)
-file for the full license.
+	-se possibile e non ho potuto effettuare la mossa precedente, muovo le tile verso sinistra e subito dopo verso destra (sblocco a sinistra)
+	-se possibile e non ho potuto effettuare la mossa precedente, muovo le tile verso il basso
+
+	
+<pre>
+######################### 
+#     #  8  #  16 #  32 # 
+#########################
+#     #     #  8  #  16 #
+#########################
+#     #     #     #  8  #
+#########################
+#     #     #     #     #
+#########################
+
+Esempio di situazione bloccata, necessaria una mossa di sblocco:
+</pre>
+
+
+Come per la maggior parte degli algoritmi di 2048, l'ostacolo più importante è dato dallo spawn dei tile 2 e 4 in posizioni "scomode".
+Nonostante la sua semplicità, l'algoritmo arriva in media al tile 256 e al 512, con picchi positivi di tile 1024(partita ottima) e picchi negativi di tile 128 o 64(partita pessima).
+
+##Utilizzo:
+Il gioco non nasce esclusivamente per il giocatore automatico; al suo avvio, infatti, è possibile giocare normalmente con i tasti freccia della tastiera, sia avviare e fermare a piacimento il Bot per il giocatore automatico tramite l'apposito tasto.
