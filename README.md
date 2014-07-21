@@ -59,4 +59,4 @@ Come per la maggior parte degli algoritmi di 2048, l'ostacolo più importante è
 Nonostante la sua semplicità, l'algoritmo arriva in media al tile 256 e al 512, con picchi positivi di tile 1024(partita ottima) e picchi negativi di tile 128 o 64(partita pessima).
 
 ##Utilizzo:
-Il gioco non nasce esclusivamente per il giocatore automatico; al suo avvio, infatti, è possibile giocare normalmente con i tasti freccia della tastiera, sia avviare e fermare a piacimento il Bot per il giocatore automatico tramite l'apposito tasto.
+Il gioco non nasce esclusivamente per il giocatore automatico; al suo avvio, infatti, è possibile giocare normalmente con i tasti freccia della tastiera, sia avviare e fermare a piacimento il Bot per il giocatore automatico tramite l'apposito tasto; è inoltre possibile eseguire delle mosse da tastiera mentre il bot è in azione, in modo da aiutarlo o dargli fastidio.
