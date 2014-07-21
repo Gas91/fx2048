@@ -119,10 +119,10 @@ public class MyGiocatoreAutomatico implements GiocatoreAutomatico{
                 }
                 System.out.print("0 - ");
                 return 0;  
-             case 2:  //sinistra bugf
+             case 2:  //sinistra 
                 System.out.print("sx ");
                 for(y=0;y<4;y++){                               
-                    for(x=3;x>0;x--){// non scorro l'ultima colonna perche devo controllare verso destra
+                    for(x=3;x>0;x--){
                         a= g.get(new Location(x,y));
                         b= g.get(new Location(x-1,y));
                         if (a != -1){ //se la cella non è vuota 
