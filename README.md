@@ -26,17 +26,17 @@ Il bottone del giocatore automatico, "Avvia Bot", è stato inserito nello stesso
 ##Chiamata del giocatore automatico
 
 Per poter richiamare il giocatore automatico sono state aggiunte una serie di classi che ne permettono il funzionamento:
--AutoGame Il thread che ogni tot ms richiama l'evento per la gestione della mossa automatica successiva.
--BotEvent
--BotEventListener
--SimpleBotEventlistener Genera la mossa successiva e simula la pressione del pulsante.
+- AutoGame Il thread che ogni tot ms richiama l'evento per la gestione della mossa automatica successiva.
+- BotEvent
+- BotEventListener
+- SimpleBotEventlistener Genera la mossa successiva e simula la pressione del pulsante.
 All'interno della classe GameManager è stata aggiunta la creazione del SimpleBotEventListener (al quale viene passato il GameManager) e del thread AutoGame, al quale viene passato il SimpleBotEventListener; una volta che il thread è avviato continua a girare in beckground controllando il proprio stato di attivazione sino alla pressione dell'apposito pulsante del bot. 
 Quando il pulsante viene premuto il thread viene attivato e inizia a richiamare l'eventListener ogni TIME_DELAY_BOT millisecondi; l'eventListener ogni volta che viene richiamato richiede al giocatore automatico la mossa successiva passandogli una Griglia appena recuperata dal GameManager che la genera automaticamente ad ogni richiamo del metodo Move.
 Per rendere effettiva la mossa risultante viene simulata la pressione da tastiera della freccia corrispondente (soltanto per la Scene del gioco stesso, in modo che la pressione automatica non interferisca con gli altri programmi); in questo modo il gioco esegue la mossa voluta come se fosse stato premuto fisicamente il pulsante dal giocatore.
 
 Per permettere tutto questo sono state effettuate numerose modifiche alla classe GameManager, in particolare sono stati aggiunti i seguenti metodi:
--createGriglia Crea la griglia di classe MyGriglia necessaria per il funzionamento del giocatore automatico. Viene richiamata ad ogni ciclo di Move.
--getGriglia Restituisce la Griglia di classe MyGriglia precedentemente istanziata.
+- createGriglia Crea la griglia di classe MyGriglia necessaria per il funzionamento del giocatore automatico. Viene richiamata ad ogni ciclo di Move.
+- getGriglia Restituisce la Griglia di classe MyGriglia precedentemente istanziata.
 
 Inoltre nel metodo createScore di GameManager è stata aggiunta la creazione del bottone del bot e del thread.
 
