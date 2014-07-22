@@ -75,6 +75,32 @@ Esempio di situazione bloccata, necessaria una mossa di sblocco:
 </pre>
 
 
+## Il controllo della mossa tramite isPossible
+
+
+IsPossible utilizza la Griglia e accetta in ingresso int move, parametro che specifica la mossa da controllare.
+Usando la Griglia e int mossa si determinaa se la mossa è possibile per evitare che il giocatore automtico si blocchi.
+Nel caso la mossa sia possibile si ritorna 1, 0 in caso contrario.
+
+Per ottenere questo risultato si utilizza uno switch per effettuare diversi controlli a seconda della mossa da fare. 
+Per scorrere la griglia si usano due for in cui si scorre la griglia, si ottiene il valore della cella in questione e si fanno dei controlli. 
+A seconda della mossa da fare la griglia si scorre in modo diverso. In generale si scorre una riga o una colonna in meno perche quest'ultima viene esaminata durante l'ultimo controllo.
+
+Affinchè la mossa abbia successo si devono verifiare le condizioni dove nella direzione in questione deve essere presente una
+ cella piena affiancata, nella direzione indicata da move,  da una cella che sia vuota oppure con un numero uguale.
+
+Nella pratica in caso di mossa da effettuare verso l'alto si controlla se esiste almeno una cella non vuota al di sopra della quale si trova una cella vuota oppure una cella con un numero uguale. 
+
+In caso di mossa da effettuare verso destra si controlla se esiste almeno una cella non vuota alla destra della quale si trova una cella 
+vuota oppure una cella con un numero uguale. 
+
+In caso di mossa da effettuare verso sinistra si controlla se esiste almeno una cella non vuota alla sinistra della quale si trova una cella vuota oppure una cella con un numero uguale. 
+
+In caso di mossa da effettuare verso il basso si controlla se esiste almeno una cella non vuota sotto la quale si trova una cella 
+vuota oppure una cella con un numero uguale. 
+
+
+
 Come per la maggior parte degli algoritmi di 2048, l'ostacolo più importante è dato dallo spawn dei tile 2 e 4 in posizioni "scomode".
 Nonostante la sua semplicità, l'algoritmo arriva in media al tile 256 e al 512, con picchi positivi di tile 1024(partita ottima) e picchi negativi di tile 128 o 64(partita pessima).
 
